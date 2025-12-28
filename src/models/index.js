@@ -8,6 +8,15 @@ const process = require("process");
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.json")[env];
+if (process.env.DB_CA_CERT) {
+  config.dialectOptions = {
+    ssl: {
+      ca: process.env.DB_CA_CERT,
+      rejectUnauthorized: true,
+    },
+  };
+}
+
 const db = {};
 
 let sequelize;

@@ -10,6 +10,10 @@ const connectDB = async () => {
       user: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
+      ssl: {
+    ca: process.env.DB_CA_CERT,
+    rejectUnauthorized: true,
+  },
     });
 
     console.log("✅ Connected DB:", process.env.DB_NAME);
